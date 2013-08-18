@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>CSS Grid Layout Test</title>
+  <link rel="author" title="Denis" href="mailto:swainet@gmail.com"/>
+  <link rel="help" href="http://www.w3.org/TR/css3-grid-layout/#display-inline-grid"/>
+  <link rel="stylesheet" href="/resources/testharness.css"/>
+  <style type="text/css">
+    #container {
+      position:relative;
+    }
+    #grid{
+      display:inline-block;
+      width:200px;
+      height:100px;
+    }
+
+    .inline {
+      display:inline-block;
+      width:100px;
+    }
+
+    .error {
+      position:absolute;
+      top:0;
+      left:100px;
+      height:100px;
+      width:200px;
+      z-index:-1;
+      background-color:red;
+    }
+
+  </style>
+</head>
+<body>
+<p>Test passes if there is a grid inline.</p>
+
+<div id="container">
+  <div class="inline">inline-block</div><div id="grid"></div><div class="inline">inline-block</div>
+  <div class="error"></div>
+</div>
+</body>
+</html>
