@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>CSS Grid Layout Test</title>
-  <link rel="author" title="Denis" href="mailto:swainet@gmail.com"/>
-  <link rel="help" href="http://www.w3.org/TR/css3-grid-layout/#display-inline-grid"/>
+  <link rel="author" title="swain" href="mailto:swainet@126.com"/>
+  <link rel="help" href="http://dev.w3.org/csswg/css-grid/#grid-containers"/>
   <link rel="match" href="reference/display-inline-grid-ref.html">
+  <meta name="flags" content="dom userstyle">
   <link rel="stylesheet" href="/resources/testharness.css"/>
   <style type="text/css">
     #container {
@@ -13,40 +14,44 @@
 
     #grid {
       display:inline-grid;
-      grid-columns:100px 100px;
-      grid-rows:30px 1fr 30px;
+      display:-ms-inline-grid;
+      -ms-grid-columns:100px 300px;
+      grid-definition-columns:100px 300px;
+      -ms-grid-rows:70px 30px;
+      grid-definition-rows:70px 30px;
       height:100px;
     }
 
     #cell1 {
+      -ms-grid-column:1;
       grid-column:1;
+      -ms-grid-row:1;
       grid-row:1;
       background-color:green;
     }
 
     #cell2 {
-      grid-column:1;
-      grid-row:2;
-      background-color:forestgreen;
-    }
-
-    #cell3 {
+      -ms-grid-column:2;
       grid-column:2;
+      -ms-grid-row:1;
       grid-row:1;
-      grid-row-span:2;
-      background-color:darkgreen;
-    }
-
-    #cell4 {
-      grid-column:1;
-      grid-row:3;
       background-color:limegreen;
     }
 
-    #cell5 {
+    #cell3 {
+      -ms-grid-column:1;
+      grid-column:1;
+      -ms-grid-row:2;
+      grid-row:2;
+      background-color:limegreen;
+    }
+
+    #cell4 {
+      -ms-grid-column:2;
       grid-column:2;
-      grid-row:3;
-      background-color:seagreen;
+      -ms-grid-row:2;
+      grid-row:2;
+      background-color:green;
     }
 
     .inline {
@@ -59,7 +64,7 @@
       top:0;
       left:100px;
       height:100px;
-      width:200px;
+      width:400px;
       z-index:-1;
     }
 
@@ -72,43 +77,38 @@
     #table td {
       padding:0;
       vertical-align:top;
-      background-color:red;
     }
 
     #table td:first-child {
       width:100px;
     }
 
-    #table tr:first-child td, #table tr:last-child td {
+    #table tr:last-child td {
       height:30px;
     }
 
   </style>
 </head>
 <body>
-<p>Test passes if there is a green square and no red.</p>
+<p>Test passes if there is 4 green rectangles and no red.</p>
 
 <div id="container">
-  <div id="grid">
+  <div class="inline">inline-block</div><div id="grid">
     <div id="cell1">cell1</div>
     <div id="cell2">cell2</div>
     <div id="cell3">cell3</div>
     <div id="cell4">cell4</div>
-    <div id="cell5">cell5</div>
   </div><div class="inline">inline-block</div>
   <div class="error">
     <table id="table">
       <tbody>
       <tr>
-        <td>cell1</td>
-        <td rowspan="2">cell3</td>
+        <td style="background-color:#f00">cell1</td>
+        <td style="background-color:#e00">cell2</td>
       </tr>
       <tr>
-        <td>cell2</td>
-      </tr>
-      <tr>
-        <td>cell4</td>
-        <td>cell5</td>
+        <td style="background-color:#e00">cell3</td>
+        <td style="background-color:#f00">cell4</td>
       </tr>
       </tbody>
     </table>
