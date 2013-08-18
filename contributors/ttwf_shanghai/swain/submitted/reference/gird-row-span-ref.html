@@ -4,7 +4,6 @@
   <title>CSS Grid Layout Test</title>
   <link rel="author" title="swain" href="mailto:swainet@126.com"/>
   <link rel="help" href="http://dev.w3.org/csswg/css-grid/#adapting-to-available-space"/>
-  <link rel="match" href="reference/gird-column-span-ref.html">
   <meta name="flags" content="dom userstyle">
   <link rel="stylesheet" href="/resources/testharness.css"/>
   <style type="text/css">
@@ -44,15 +43,16 @@
 <p>Test passes if there is a green rectangle and no red.</p>
 
 <div id="container">
+
   <div class="error">
     <table id="table">
       <tbody>
       <tr>
         <td>cell1</td>
-        <td>cell2</td>
+        <td rowspan="2" style="background-color:green;">cell2</td>
       </tr>
       <tr>
-        <td colspan="2" style="background-color:green;">cell3</td>
+        <td>cell3</td>
       </tr>
       </tbody>
     </table>
