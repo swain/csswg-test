@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>CSS Grid Layout Test</title>
-  <link rel="author" title="Denis" href="mailto:swainet@gmail.com"/>
-  <link rel="help" href="http://www.w3.org/TR/css3-grid-layout/#fr-unit"/>
-  <link rel="match" href="reference/track-size-flex-ref.html">
+  <link rel="author" title="swain" href="mailto:swainet@126.com"/>
+  <link rel="help" href="http://dev.w3.org/csswg/css-grid/#fr-unit"/>
+  <link rel="match" href="reference/track-size-ref.html">
   <meta name="flags" content="dom userstyle">
   <link rel="stylesheet" href="/resources/testharness.css"/>
   <style type="text/css">
@@ -15,34 +15,43 @@
     }
 
     #grid {
+      display:-ms-grid;
       display:grid;
-      grid-columns:100px 1fr;
-      grid-rows:30px 1fr;
+      -ms-grid-columns:100px 1fr;
+      grid-definition-columns:100px 1fr;
+      -ms-grid-rows:30px 1fr;
+      grid-definition-rows:30px 1fr;
       width:100%;
       height:100%;
     }
 
     #cell1 {
+      -ms-grid-column:1;
       grid-column:1;
+      -ms-grid-row:1;
       grid-row:1;
     }
 
     #cell2 {
+      -ms-grid-column:2;
       grid-column:2;
+      -ms-grid-row:1;
       grid-row:1;
-      background-color:forestgreen;
     }
 
     #cell3 {
+      -ms-grid-column:1;
       grid-column:1;
+      -ms-grid-row:2;
       grid-row:2;
-      background-color:darkgreen;
     }
 
     #cell4 {
+      -ms-grid-column:2;
       grid-column:2;
+      -ms-grid-row:2;
       grid-row:2;
-      background-color:limegreen;
+      background-color:green;
     }
 
     .error {
@@ -72,10 +81,6 @@
     #table tr:first-child td {
       height:30px;
     }
-
-    .red {
-      background-color:red;
-    }
   </style>
   <script src="/resources/testharness.js"></script>
   <script src="/resources/testharnessreport.js"></script>
@@ -94,12 +99,12 @@
     <table id="table">
       <tbody>
       <tr>
-        <td></td>
-        <td class="red"></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
-        <td class="red"></td>
-        <td class="red"></td>
+        <td>&nbsp;</td>
+        <td style="background-color:red">&nbsp;</td>
       </tr>
       </tbody>
     </table>
@@ -112,12 +117,6 @@
   }
 
   test(function () {
-    assert_equals(getPropertyValue('cell2', 'width'),
-      "300px",
-      "Cell2's width should be 300px.");
-    assert_equals(getPropertyValue('cell3', 'height'),
-      "70px",
-      "Cell3's height should be 70px.");
     assert_equals(getPropertyValue('cell4', 'width'),
       "300px",
       "Cell4's width should be 300px.");

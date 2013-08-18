@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>CSS Grid Layout Test</title>
-  <link rel="author" title="Denis" href="mailto:swainet@gmail.com"/>
-  <link rel="help" href="http://www.w3.org/TR/css3-grid-layout/#display-grid"/>
-  <link rel="match" href="reference/gird-row-span-ref.html">
+  <link rel="author" title="swain" href="mailto:swainet@126.com"/>
+  <link rel="help" href="http://dev.w3.org/csswg/css-grid/#adapting-to-available-space"/>
+  <link rel="match" href="reference/gird-column-span-ref.html">
   <meta name="flags" content="dom userstyle">
   <link rel="stylesheet" href="/resources/testharness.css"/>
   <style type="text/css">
@@ -16,26 +16,35 @@
 
     #grid {
       display:grid;
-      grid-columns:100px 1fr;
-      grid-rows:50px 50px;
+      display:-ms-grid;
+      -ms-grid-columns:100px 300px;
+      grid-definition-columns:100px 300px;
+      -ms-grid-rows:70px 30px;
+      grid-definition-rows:70px 30px;
       height:100%;
     }
 
     #cell1 {
+      -ms-grid-column:1;
       grid-column:1;
+      -ms-grid-row:1;
       grid-row:1;
     }
 
     #cell2 {
-      grid-column:1;
-      grid-row:2;
+      -ms-grid-column:2;
+      grid-column:2;
+      -ms-grid-row:1;
+      -ms-grid-row-span:2;
+      grid-row:1 / span 2;
+      background-color:green;
     }
 
     #cell3 {
-      grid-column:2;
-      grid-row:1;
-      grid-row-span:2;
-      background-color:green;
+      -ms-grid-column:1;
+      grid-column:1;
+      -ms-grid-row:2;
+      grid-row:2;
     }
 
     .error {
@@ -58,17 +67,14 @@
       vertical-align:top;
     }
 
-    #table td:first-child {
+    #table tr:last-child td {
       width:100px;
-      height:50px;
-    }
-    .row-span {
-      background-color:red;
+      height:30px;
     }
   </style>
 </head>
 <body>
-<p>Test passes if there is a green square and no red.</p>
+<p>Test passes if there is a green rectangle and no red.</p>
 
 <div id="container">
   <div id="grid">
@@ -80,11 +86,11 @@
     <table id="table">
       <tbody>
       <tr>
-        <td></td>
-        <td rowspan="2" class="row-span"></td>
+        <td>&nbsp;</td>
+        <td rowspan="2" style="background-color:red;">&nbsp;</td>
       </tr>
       <tr>
-        <td></td>
+        <td>&nbsp;</td>
       </tr>
       </tbody>
     </table>
